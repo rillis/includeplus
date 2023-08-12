@@ -32,7 +32,7 @@ if(isset($_POST["user"]) && isset($_POST["pass"]) && !isset($_SESSION["token"]))
     }
 
     $stmt->close();
-    header("Location: /pc/admin/login?error=login_fail");
+    header("Location: /pc/admin/login?error=Credenciais incorretas.");
     exit();
 
 }

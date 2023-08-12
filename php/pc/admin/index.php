@@ -8,7 +8,7 @@ if (!isset($_SESSION['token'])){
 <!DOCTYPE html>
 <html lang="pt-br" dir="ltr">
   <head>
-    <script src='scripts/ensurePC.js'></script>
+
     <meta charset="utf-8">
     <title>Include+</title>
 
@@ -16,5 +16,12 @@ if (!isset($_SESSION['token'])){
   </head>
   <body>
       ADMIN PANEL <a href="login/logout.php">Logout</a>
+
+      <script src='../../scripts/ensureViewPort.js'></script>
+      <script>
+        if(window.mobileCheck()){
+          window.location.href = "/m";
+        }
+      </script>
   </body>
 </html>
