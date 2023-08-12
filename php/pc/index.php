@@ -1,6 +1,22 @@
+<?php
+include('admin/login/validate_login.php');
+
+session_start();
+if (isLogged()){
+  header('Location: /pc/admin');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
+
+      <script src='../../scripts/ensureViewPort.js'></script>
+      <script>
+        if(window.mobileCheck()){
+          window.location.href = "/m";
+        }
+      </script>
 
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -65,12 +81,7 @@
             </div>
         </footer>
 
-        <script src='../../scripts/ensureViewPort.js'></script>
-        <script>
-          if(window.mobileCheck()){
-            window.location.href = "/m";
-          }
-        </script>
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="js/scripts.js"></script>
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>

@@ -1,18 +1,24 @@
 <?php
 include('validate_login.php');
 
-if (isset($_SESSION['token'])){
+if (isLogged()){
   header('Location: /pc/admin');
 }
 ?>
 <!DOCTYPE html>
 <html lang="pt-br" dir="ltr">
   <head>
+    <script src='../../scripts/ensureViewPort.js'></script>
+    <script>
+      if(window.mobileCheck()){
+        window.location.href = "/m";
+      }
+    </script>
     <meta charset="utf-8">
     <title>Include+</title>
 
     <link href="../../css/styles.css" rel="stylesheet" />
-    <link href="../../css/adminpanel.css" rel="stylesheet" />
+    <link href="../../css/admin_login.css" rel="stylesheet" />
 
   </head>
   <body>
@@ -30,7 +36,7 @@ if (isset($_SESSION['token'])){
           <input type="password" name="pass" value="" class="form-control" placeholder="Password"  style="width:20vw;">
         </div>
         <div class="p-2">
-          <input type="submit" value="Login" class="btn btn-primary mb-2"  style="width:10vw;">
+          <input type="submit" value="Admin Login" class="btn btn-dark mb-2"  style="width:10vw;">
         </div>
       </div>
 
@@ -43,16 +49,5 @@ if (isset($_SESSION['token'])){
     ?>
 </div>
 </form>
-
-
-
-
-
-      <script src='../../../scripts/ensureViewPort.js'></script>
-      <script>
-        if(window.mobileCheck()){
-          window.location.href = "/m";
-        }
-      </script>
   </body>
 </html>

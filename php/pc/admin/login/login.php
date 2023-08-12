@@ -2,6 +2,10 @@
 include('validate_login.php');
 session_start();
 
+if (isLogged()){
+  header('Location: /pc/admin');
+}
+
 if(isset($_POST["user"]) && isset($_POST["pass"]) && !isset($_SESSION["token"])){
   $user = $_POST['user'];
   $pass2 = password_hash($_POST['pass'], PASSWORD_DEFAULT);
@@ -22,8 +26,9 @@ if(isset($_POST["user"]) && isset($_POST["pass"]) && !isset($_SESSION["token"]))
           $_SESSION['created'] = time();
           $_SESSION['user'] = $row['user'];
           $_SESSION['id'] = $row['id'];
-          $_SESSION['until'] = $_SESSION['created'] + (30 * 60); //30 minutos
+          $_SESSION['until'] = $_SESSION['created'] + (9999 * 60); //30 minutos
           $_SESSION['token'] = md5($_SESSION['created'] . $_SESSION['user']);
+          $_SESSION['pc'] = 0;
 
           $stmt->close();
           header("Location: /pc/admin");
