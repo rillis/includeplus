@@ -4,6 +4,6 @@ window.mobileCheck = function() {
   return check;
   };
 
-  if(!mobileCheck()){
-    window.location.href = "pc/";
+  if(mobileCheck()){
+    window.location.href = "/";
   }
