@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS includeplus.users;
 CREATE TABLE includeplus.users(
                                 id int AUTO_INCREMENT PRIMARY KEY,
                                 name varchar(255) NOT NULL,
+                                user varchar(255) not null,
                                 cpf int NOT NULL,
                                 password varchar(255) NOT NULL,
                                 role varchar(255) DEFAULT 'user',

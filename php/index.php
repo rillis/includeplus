@@ -1,6 +1,3 @@
-<?php
-include('functions/connect.php');
-?>
 <html lang="pt-br" dir="ltr">
   <head>
     <script src='scripts/ensureMobile.js'></script>
