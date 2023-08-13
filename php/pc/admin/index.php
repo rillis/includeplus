@@ -5,12 +5,38 @@ if (!isLogged()){
   header('Location: /pc/admin/login');
 }
 
-include('../../functions/connect.php');
+function getDBToTable($query, $multarray, $type){
+  include('../../functions/connect.php');
+
+  $s = '<table id="DataTable" class="display" style="width:75vw;"><thead><tr>';
+  foreach (array_keys($multarray) as $key) {
+    $s = $s . '<th>'.$key.'</th>';
+  }
+  $s = $s . '<th>GoTo</th></tr></thead><tbody>';
+  $result = $connection->query($query);
+  foreach($result as $row) {
+    $s = $s . '<tr>';
+      foreach ($multarray as $key => $value) {
+        $s = $s . '<td>'.$row[$value].'</td>';
+      }
+    $s = $s . '<td><a href="/pc/admin/details.php?type='.$type.'&id='.$row['id'].'">Details</a></td></tr>';
+  }
+  $s = $s . '</tbody></table>';
+  return $s;
+}
+
+function totalPending($text, $table, $link){
+  include('../../functions/connect.php');
+  $query = "SELECT count(*) as cnt from ".$table;
+  $result = $connection->query($query);
+  $row = $result->fetch_assoc();
+  return '<br><span class="pending_count">'.$text.': '.$row["cnt"].'</span> <a href="/pc/admin?page='.$link.'">></a>';
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
-    <script src='../../scripts/ensureViewPort.js'></script> 
+    <script src='../../functions/ensureViewPort.js'></script>
     <script>
       if(window.mobileCheck()){
         window.location.href = "/m";
@@ -19,8 +45,11 @@ include('../../functions/connect.php');
     <meta charset="utf-8">
     <title>Include+</title>
 
-    <link href="../css/styles.css" rel="stylesheet" />
-    <link href="../css/admin_panel.css" rel="stylesheet" />
+
+
+    <link href="../assets/css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/css/datatables.min.css" />
+    <link href="../assets/css/admin_panel.css" rel="stylesheet" />
   </head>
   <body>
 
@@ -34,30 +63,44 @@ include('../../functions/connect.php');
         </div>
         <div class="content d-flex align-items-start flex-wrap" style="">
           <?php
+            //no page
             if(!isset($_GET["page"])){
               ?>
               <div class="non-page">
                 <span class="hello">Hello, <?php echo $_SESSION['user']." (ID ".$_SESSION['id'].")" ?>.</span><br>
-
                 <?php
-                $query = "SELECT count(*) as cnt from vw_pending_posts";
-                $result = $connection->query($query);
-                $row = $result->fetch_assoc();
-                echo '<br><span class="pending_count">Pending posts: '.$row["cnt"].'</span> <a href="/pc/admin?page=pending_posts">></a>';
-                $query = "SELECT count(*) as cnt from vw_pending_removals";
-                $result = $connection->query($query);
-                $row = $result->fetch_assoc();
-                echo '<br><span class="pending_count">Pending removals: '.$row["cnt"].'</span> <a href="/pc/admin?page=pending_removals">></a>';
+                echo totalPending("Pending posts", "vw_pending_posts", "pending_posts");
+                echo totalPending("Pending removals", "vw_pending_removals", "pending_removals");
                 ?>
               </div>
               <?php
-              $stmt->close();
-            }
-          ?>
+                }else if($_GET['page'] === "pending_posts"){
+                  $arr = ["ID" => "id", "Place ID" => "place_id", "User" => "user", "Title" => "title", "Create Time" => "created_at"];
+                  $query = "SELECT a.*, b.name, b.user FROM vw_pending_posts a LEFT JOIN users b ON a.user_id = b.id";
+                  echo getDBToTable($query, $arr, "pending_posts");
+                }else if($_GET['page'] === "pending_removals"){
+                  $arr = ["ID" => "id", "Post ID" => "post_id", "User" => "user", "Title" => "title", "Create Time" => "created_at"];
+                  $query = "SELECT a.*, b.name, b.user FROM vw_pending_removals a LEFT JOIN users b ON a.user_id = b.id";
+                  echo getDBToTable($query, $arr, "pending_removals");
+                }else if($_GET['page'] === "posts"){
+                  $arr = ["ID" => "id", "Place ID" => "place_id", "User" => "user", "Title" => "title", "Create Time" => "created_at", "Approved By" => "approved_by_user"];
+                  $query = "SELECT a.*, b.name, b.user, c.user as approved_by_user FROM posts a LEFT JOIN users b ON a.user_id = b.id LEFT JOIN users c ON a.approved_by = c.id";
+                  echo getDBToTable($query, $arr, "posts");
+                }else{
+                  header('Location: /pc/admin');
+                }
+              ?>
         </div>
       </div>
 
-
+      <script src="../assets/js/jquery-3.7.0.min.js"></script>
+      <script src="../assets/js/datatables.min.js"></script>
+      <script>
+      let table = new DataTable('#DataTable');
+        $(document).ready(function() {
+          document.getElementsByTagName("html")[0].style.visibility = "visible";
+        });
+      </script>
 
   </body>
 </html>

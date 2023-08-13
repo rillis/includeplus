@@ -8,7 +8,7 @@ if (isLogged()){
 <!DOCTYPE html>
 <html lang="pt-br" dir="ltr">
   <head>
-    <script src='../../scripts/ensureViewPort.js'></script>
+    <script src='../../../functions/ensureViewPort.js'></script>
     <script>
       if(window.mobileCheck()){
         window.location.href = "/m";
@@ -17,17 +17,17 @@ if (isLogged()){
     <meta charset="utf-8">
     <title>Include+</title>
 
-    <link href="../../css/styles.css" rel="stylesheet" />
-    <link href="../../css/admin_login.css" rel="stylesheet" />
+    <link href="../../assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="../../assets/css/admin_login.css" rel="stylesheet" />
 
   </head>
   <body>
     <form class="" action="login.php" method="post">
 <div class="d-flex flex-column justify-content-center align-items-center" style="height:100vh;">
 
-      <div class="form-div d-flex flex-column justify-content-center align-items-center">
+  <div class="form-div d-flex flex-column justify-content-center align-items-center">
         <div class="p-4">
-          <img src="../../assets/logo_max.png" style="width:20vw;" />
+          <img src="../../assets/img/logo_max.png" style="width:20vw;" />
         </div>
         <div class="p-1 form-group">
           <input type="text" name="user" value="" class="form-control" placeholder="Username" style="width:20vw;">
@@ -37,6 +37,7 @@ if (isLogged()){
         </div>
         <div class="p-2">
           <input type="submit" value="Admin Login" class="btn btn-dark mb-2"  style="width:10vw;">
+          <a href="/pc"><input type="button" value="Go Back" class="btn btn-danger mb-2"  style="width:8vw;"></a>
         </div>
       </div>
 

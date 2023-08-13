@@ -1,3 +1,5 @@
+html { visibility:hidden; }
+
 body {
   background-image: url("../assets/hex.png");
   background-repeat: repeat;
@@ -38,4 +40,12 @@ body {
   font-size: 35px;
   margin: 2vw;
   margin-bottom: 2vh;
+}
+
+.display{
+  width:100%;
+}
+
+.display{
+  background-color: white;
 }

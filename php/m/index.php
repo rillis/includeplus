@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
-    <script src='../scripts/ensureViewPort.js'></script>
+    <script src='../functions/ensureViewPort.js'></script>
     <script>
       if(!window.mobileCheck()){
         window.location.href = "/pc";

@@ -1,3 +1,4 @@
 internal/*
 sql/secret*
 php/functions/secret/*
+php/posts/*/*/*

@@ -11,7 +11,7 @@ if (isLogged()){
 <html lang="en">
     <head>
 
-      <script src='../../scripts/ensureViewPort.js'></script>
+      <script src='../functions/ensureViewPort.js'></script>
       <script>
         if(window.mobileCheck()){
           window.location.href = "/m";
@@ -29,12 +29,12 @@ if (isLogged()){
         <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,500;0,600;0,700;1,300;1,500;1,600;1,700&amp;display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400&amp;display=swap" rel="stylesheet" />
 
-        <link href="css/styles.css" rel="stylesheet" />
+        <link href="assets/css/bootstrap.css" rel="stylesheet" />
     </head>
     <body id="page-top">
         <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="mainNav">
             <div class="container px-5">
-                <a class="navbar-brand fw-bold" href="/pc"><img src="assets/logo_max.png" style="height:30px;"/></a>
+                <a class="navbar-brand fw-bold" href="/pc"><img src="assets/img/logo_max.png" style="height:30px;"/></a>
             </div>
         </nav>
         <header class="masthead">
@@ -63,7 +63,7 @@ if (isLogged()){
                             <div class="device-wrapper">
                                 <div class="device" data-device="iPhoneX" data-orientation="portrait" data-color="black">
                                     <div class="screen bg-black">
-                                        <video muted="muted" autoplay="" loop="" style="max-width: 100%; height: 100%"><source src="assets/img/demo-screen.mp4" type="video/mp4" /></video>
+                                        <video muted="muted" autoplay="" loop="" style="max-width: 100%; height: 100%"><source src="assets/video/demo-screen.mp4" type="video/mp4" /></video>
                                     </div>
                                 </div>
                             </div>
@@ -82,8 +82,6 @@ if (isLogged()){
         </footer>
 
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="js/scripts.js"></script>
-        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+        <script src="assets/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>
