@@ -1,14 +1,12 @@
 <?php
-$root = "../";
+$root = "../../";
 include($root.'functions/validate_login.php');
 include($root.'functions/tempo.php');
+include($root.'functions/loc.php');
 
 if (!isLogged("mob")){
     header('Location: /m/login');
 }
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -24,16 +22,16 @@ if (!isLogged("mob")){
     <meta charset="utf-8">
     <title>Include+</title>
 
-    <link href="assets/css/bootstrap.css" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/css/datatables.min.css" />
-    <link href="assets/css/mob.css" rel="stylesheet" />
+    <link href="../assets/css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../assets/css/datatables.min.css" />
+    <link href="../assets/css/mob.css" rel="stylesheet" />
 </head>
 <body class="">
 <div class="ftco-section">
     <div class="container">
         <div class="row justify-content-center logo">
             <div class="col-md-6 text-center mb-5">
-                <img src="assets/img/logo_max.png" class="img_logo" />
+                <img src="../assets/img/logo_max.png" class="img_logo" />
             </div>
         </div>
         <div class="row justify-content-center">
@@ -48,32 +46,38 @@ if (!isLogged("mob")){
 
 <a href="/m/send">
     <div class="bubble d-flex justify-content-center align-items-center navbar_med">
-        <img src="assets/img/plus.png" class="bubble_img" />
+        <img src="../assets/img/plus.png" class="bubble_img" />
     </div>
 </a>
-
 
 <div class="debug" style="height:3vh"></div>
 
 <?php
-    if(isset($_GET["error"])){
-        echo '<div class="p-3"><div class="alert alert-danger" role="alert">'.$_GET['error'].'</div></div>';
-    }
-
-    if(isset($_GET["msg"])){
-        echo '<div class="p-3"><div class="alert alert-info" role="alert">'.$_GET['msg'].'</div></div>';
-    }
-?>
+    global $root;
+    include($root.'functions/connect.php');
 
 
-<h2 style="color:white">Ultimos envios:</h2>
+    $result = $connection->query('SELECT a.* FROM users a WHERE a.id = '.$_SESSION['id']);
 
-<?php
-global $root;
-include($root.'functions/connect.php');
+if ($result->num_rows === 1) {
+    $row = $result->fetch_assoc();
+    $name = $row["name"];
+    $user = $row["user"];
 
-$result = $connection->query('SELECT a.*, b.display_name, b.address FROM vw_active_posts a LEFT JOIN places b ON a.place_id = b.id ORDER BY a.created_at desc limit 20');
+    ?>
+    <div class="d-flex align-items-start flex-column" style="margin-left:10px;">
+        <span class="place_name"><?=$name?> (<a href="/m/login/logout.php" style="color:red">LOGOUT</a>)</span>
+        <span class="place_addr"><?=$user?></span>
+    </div>
+    <?php
 
+
+
+}else{
+    die("FATAL ERROR");
+}
+    $result = $connection->query('SELECT a.*, b.display_name, b.address FROM vw_active_posts a INNER JOIN places b ON a.user_id = '.$_SESSION['id'].' and a.place_id = b.id ORDER BY a.created_at desc limit 100');
+if ($result->num_rows > 0) {
 foreach($result as $row) {
     ?>
     <div class="post d-flex align-items-start flex-column">
@@ -81,16 +85,19 @@ foreach($result as $row) {
         <span class="post_place_addr"><?=$row["address"]?></span>
         <span class="post_title"><?=$row["title"]?></span>
         <div class = "post_img_holder d-flex justify-content-center align-items-center">
-            <img src="../posts/<?=$row["id"]?>/post.png" class="post_img"/>
+            <img src="../../posts/<?=$row["id"]?>/post.png" class="post_img"/>
         </div>
         <a href="/m/send?removal=1&post=<?=$row["id"]?>"><span class="post_created" style="margin-top:10px;color:#f87171">Esse problema já foi corrigido? Clique aqui</span></a>
         <span class="post_created"><?=tempoAtras($row["created_at"])?></span>
     </div>
-    <?php
+<?php
+}
+}else{
+    echo '<div class="p-3"><div class="alert alert-danger" role="alert">Posts não encontrados. (002)</div></div>';
 }
 
-
 ?>
+
 
 
 
@@ -107,13 +114,13 @@ foreach($result as $row) {
 <div class="navbar_bottom">
     <div class="d-flex justify-content-center align-items-center navbar_med">
         <div class="col-xs-1 navbar_item">
-            <a href="/m/"><img src="assets/img/home_on.png" class="navbar_img" /></a>
+            <a href="/m/"><img src="../assets/img/home_off.png" class="navbar_img" /></a>
         </div>
         <div class="col-xs-1 navbar_item">
-            <a href="/m/search"><img src="assets/img/search_off.png" class="navbar_img" /></a>
+            <a href="/m/search"><img src="../assets/img/search_off.png" class="navbar_img" /></a>
         </div>
         <div class="col-xs-1 navbar_item">
-            <a href="/m/profile"><img src="assets/img/profile_off.png" class="navbar_img" /></a>
+            <a href="/m/profile"><img src="../assets/img/profile_on.png" class="navbar_img" /></a>
         </div>
     </div>
 </div>

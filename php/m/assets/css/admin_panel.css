@@ -1,0 +1,51 @@
+html { visibility:hidden; }
+
+body {
+  background-image: url("../assets/hex.png");
+  background-repeat: repeat;
+}
+
+.side-menu{
+  width: 250px;
+  height:100vh;
+
+  background-color: #1b4180;
+
+  color: #ffffff;
+}
+
+.non-page{
+  background-color:white;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.content{
+  width:80vw;
+  padding: 5vh;
+}
+
+.side-menu-item{
+  margin-left: 2vw;
+  margin-right: 2vw;
+  border-bottom: 1px solid #2f5aa1;
+}
+
+.logout{
+  color: red;
+  border-bottom: 0px;
+}
+
+.logo{
+  font-size: 35px;
+  margin: 2vw;
+  margin-bottom: 2vh;
+}
+
+.display{
+  width:100%;
+}
+
+.display{
+  background-color: white;
+}

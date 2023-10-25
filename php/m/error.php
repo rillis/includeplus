@@ -1,7 +1,10 @@
+<?php
+$root = "../";
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
-    <script src='../functions/ensureViewPort.js'></script>
+    <script src='<?=$root?>functions/ensureViewPort.js'></script>
     <script>
       if(!window.mobileCheck()){
         window.location.href = "/pc";

@@ -1,12 +1,17 @@
 <?php
-include('login/validate_login.php');
+$root = "../../";
+include($root.'functions/validate_login.php');
 
-if (!isLogged()){
+if (!isLogged("pc")){
+    //session_start();
   header('Location: /pc/admin/login');
 }
 
+
+
 function getDBToTable($query, $multarray, $type){
-  include('../../functions/connect.php');
+    global $root;
+    include($root.'functions/connect.php');
 
   $s = '<table id="DataTable" class="display" style="width:75vw;"><thead><tr>';
   foreach (array_keys($multarray) as $key) {
@@ -26,12 +31,16 @@ function getDBToTable($query, $multarray, $type){
 }
 
 function totalPending($text, $table, $link){
-  include('../../functions/connect.php');
+    global $root;
+    include($root.'functions/connect.php');
   $query = "SELECT count(*) as cnt from ".$table;
   $result = $connection->query($query);
   $row = $result->fetch_assoc();
   return '<br><span class="pending_count">'.$text.': '.$row["cnt"].'</span> <a href="/pc/admin?page='.$link.'">></a>';
 }
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -68,6 +77,17 @@ function totalPending($text, $table, $link){
               ?>
               <div class="non-page">
                 <span class="hello">Hello, <?php echo $_SESSION['user']." (ID ".$_SESSION['id'].")" ?>.</span><br>
+
+                  <?php
+                  if(isset($_GET["error"])){
+                      echo '<div class="p-3"><div class="alert alert-danger" role="alert">'.$_GET['error'].'</div></div>';
+                  }
+
+                  if(isset($_GET["msg"])){
+                      echo '<div class="p-3"><div class="alert alert-info" role="alert">'.$_GET['msg'].'</div></div>';
+                  }
+                  ?>
+
                 <?php
                 echo totalPending("Pending posts", "vw_pending_posts", "pending_posts");
                 echo totalPending("Pending removals", "vw_pending_removals", "pending_removals");

@@ -1,17 +1,21 @@
 <?php
-include('validate_login.php');
-session_start();
+$root = "../../../";
+include($root.'functions/validate_login.php');
 
-if (isLogged()){
+
+if (isLogged("pc")){
   header('Location: /pc/admin');
 }
 
+
 if(isset($_POST["user"]) && isset($_POST["pass"]) && !isset($_SESSION["token"])){
+
   $user = $_POST['user'];
   $pass2 = password_hash($_POST['pass'], PASSWORD_DEFAULT);
   $pass = $_POST['pass'];
 
-  include('../../../functions/connect.php');
+  global $root;
+  include($root.'functions/connect.php');
 
   $query = "SELECT id, user, password FROM users WHERE user = ? and role = 'admin'";
     $stmt = $connection->prepare($query);
@@ -31,16 +35,23 @@ if(isset($_POST["user"]) && isset($_POST["pass"]) && !isset($_SESSION["token"]))
           $_SESSION['pc'] = 0;
 
           $stmt->close();
+
+//          var_dump($_SESSION);
+//          die();
+
           header("Location: /pc/admin");
           exit();
         }
     }
 
     $stmt->close();
+
+
     header("Location: /pc/admin/login?error=Credenciais incorretas.");
     exit();
 
 }
+
 header("Location: /pc/admin");
 exit();
 ?>

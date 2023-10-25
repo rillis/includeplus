@@ -1,8 +1,9 @@
 <?php
-include('admin/login/validate_login.php');
+$root = "../";
+include($root.'functions/validate_login.php');
 
-session_start();
-if (isLogged()){
+//session_start();
+if (isLogged("pc")){
   header('Location: /pc/admin');
 }
 ?>
@@ -11,7 +12,7 @@ if (isLogged()){
 <html lang="en">
     <head>
 
-      <script src='../functions/ensureViewPort.js'></script>
+      <script src='<?=$root?>functions/ensureViewPort.js'></script>
       <script>
         if(window.mobileCheck()){
           window.location.href = "/m";
@@ -29,20 +30,27 @@ if (isLogged()){
         <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,500;0,600;0,700;1,300;1,500;1,600;1,700&amp;display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400&amp;display=swap" rel="stylesheet" />
 
+        <style>
+            @font-face {
+                font-family: "Gabarito";
+                src: url("assets/fonts/gabarito.ttf");
+            }
+        </style>
+
         <link href="assets/css/bootstrap.css" rel="stylesheet" />
     </head>
-    <body id="page-top">
+    <body id="page-top" style="height: 100vh">
         <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm" id="mainNav">
             <div class="container px-5">
                 <a class="navbar-brand fw-bold" href="/pc"><img src="assets/img/logo_max.png" style="height:30px;"/></a>
             </div>
         </nav>
-        <header class="masthead">
+        <header class="masthead" style="min-height: 95vh">
             <div class="container px-5">
                 <div class="row gx-5 align-items-center">
                     <div class="col-lg-6">
                         <div class="mb-5 mb-lg-0 text-center text-lg-start">
-                            <h1 class="display-1 lh-1 mb-3">Denuncie a falta de acessibilidade.</h1>
+                            <h1 class="display-1 lh-1 mb-3" style="font-family: Gabarito">Denuncie a falta de acessibilidade.</h1>
                             <p class="lead fw-normal text-muted mb-5">Entre neste site a partir de um dispositivo móvel para começar.</p>
                         </div>
                     </div>
@@ -73,7 +81,7 @@ if (isLogged()){
             </div>
         </header>
 
-        <footer class="bg-black text-center py-2">
+        <footer class="bg-black text-center py-2" style="height: 5vh">
             <div class="container px-2">
                 <div class="text-white-50 small">
                     <div class="mb-2">&copy; Include+ 2023. Todos direitos reservados.</div>

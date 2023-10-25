@@ -1,0 +1,9 @@
+body {
+  background-image: url("../img/hex.png");
+  background-repeat: repeat;
+}
+
+.form-div{
+  padding: 10px;
+  border-radius: 5%;
+}

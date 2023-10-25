@@ -6,7 +6,7 @@ CREATE TABLE includeplus.users(
                                 id int AUTO_INCREMENT PRIMARY KEY,
                                 name varchar(255) NOT NULL,
                                 user varchar(255) not null,
-                                cpf int NOT NULL,
+                                cpf long NOT NULL,
                                 password varchar(255) NOT NULL,
                                 role varchar(255) DEFAULT 'user',
                                 created_at timestamp not null
@@ -25,26 +25,19 @@ CREATE TABLE includeplus.places(
                                 created_at timestamp not null
                               );
 
-/* PLACE REQUESTS TABLE */
 DROP TABLE IF EXISTS includeplus.place_requests;
-CREATE TABLE includeplus.place_requests(
-                                id int AUTO_INCREMENT PRIMARY KEY,
-                                display_name varchar(255) NOT NULL,
-                                latitude double not null,
-                                longitude double not null,
-                                created_by int NOT NULL,
-                                created_at timestamp not null,
-                                create_post int not null
-                              );
 
 /* POSTS TABLE */
 DROP TABLE IF EXISTS includeplus.posts;
 CREATE TABLE includeplus.posts(
                                 id int AUTO_INCREMENT PRIMARY KEY,
                                 place_id INT,
+				place_request_name VARCHAR(255),
                                 user_id INT NOT NULL,
                                 photo VARCHAR(255) NOT NULL,
                                 title VARCHAR(255) NOT NULL,
+				latitude double not null,
+                                longitude double not null,
                                 approved_by int,
                                 dennied_by int,
                                 created_at timestamp not null
