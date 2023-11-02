@@ -18,6 +18,21 @@ if(isset($_POST['title']) && isset($_POST['loc_id']) && isset($_POST['result']) 
     $result = $stmt->execute();
 
     header('Location: /pc/admin?msg=Post editado');
+}else if(isset($_POST['removal_id']) && isset($_POST['result'])){
+    $var_name = 'dennied_by';
+    if($_POST['result']=="ap"){
+        $var_name = 'approved_by';
+    }
+
+    global $root;
+    include($root.'functions/connect.php');
+
+    $query = "UPDATE removals SET ".$var_name."=? WHERE id = ?";
+    $stmt = $connection->prepare($query);
+    $stmt->bind_param("ii", $_SESSION['id'], $_POST['removal_id']);
+    $result = $stmt->execute();
+
+    header('Location: /pc/admin?msg=Constestação editada');
 }else{
     header('Location: /pc/admin?error=URL Malformed');
 }

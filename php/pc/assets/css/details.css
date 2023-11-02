@@ -1,0 +1,46 @@
+.details_columns{
+}
+.col{
+    height: 100%;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.details_big_title{
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.details_title{
+    font-size: 21px;
+    font-weight: bold;
+}
+
+
+.details_id{
+    font-size: 15px;
+}
+
+.details_img{
+    margin-top: 10PX;
+    max-width:30vw;
+    max-height:50vh;
+    margin-bottom: 10PX;
+}
+
+.details_timestamp{
+    margin-bottom: 10px;
+}
+
+.details_bottom{
+    padding-right: 9vw;
+}
+
+.details_form_submitonly{
+    margin-top: 30px;
+}
+
+.details_submit{
+    margin-right:10px;
+}
