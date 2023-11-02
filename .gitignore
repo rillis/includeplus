@@ -2,3 +2,6 @@ internal/*
 sql/secret*
 php/functions/secret/*
 php/upload/*/*/*
+.idea/*
+php/posts/*
+php/removals/*
