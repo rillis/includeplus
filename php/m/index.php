@@ -39,7 +39,7 @@ if (!isLogged("mob")){
         <div class="row justify-content-center">
             <div class="col-md-6 col-lg-4">
                 <div class="login-wrap p-0">
-                    aaa
+                    
                 </div>
             </div>
         </div>

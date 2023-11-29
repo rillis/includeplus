@@ -4,7 +4,7 @@ body{
 }
 
 .logo{
-    position: fixed;
+    /* position: fixed; */
     top: 0px;
 
     width:100vw;
@@ -34,12 +34,12 @@ a:hover {
 
 .debug{
     width:100vw;
-    height: 12vh;
+    height: 10vh;
 }
 
 .navbar_bottom{
     position: fixed;
-    bottom: 0px;
+    bottom: -1px;
 
     width:100vw;
     height: 10vh;
